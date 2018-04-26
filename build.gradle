@@ -1,0 +1,50 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.12.RELEASE'
+    }
+    repositories {
+        mavenLocal()
+        maven{ url "http://maven.aliyun.com/nexus/content/groups/public/"}
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+group = 'com.hgp'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    maven{ url "http://maven.aliyun.com/nexus/content/groups/public/"}
+    mavenCentral()
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter')
+    compile('us.codecraft:webmagic-core:0.7.3') {
+        exclude module: 'slf4j-log4j12'
+        exclude module: 'log4j'
+    }
+    compile('us.codecraft:webmagic-extension:0.7.3')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+/**
+或者去掉springboot的log4j依赖
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter'){
+        exclude module: 'slf4j-log4j12'
+        exclude module: 'log4j'
+    }
+    compile('us.codecraft:webmagic-core:0.7.3')
+    compile('us.codecraft:webmagic-extension:0.7.3')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+*/
