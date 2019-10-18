@@ -28,18 +28,20 @@ repositories {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter')
-    compile('us.codecraft:webmagic-core:0.7.3') {
-        exclude module: 'slf4j-log4j12'
-        exclude module: 'log4j'
-    }
+    compile('us.codecraft:webmagic-core:0.7.3')
     compile('us.codecraft:webmagic-extension:0.7.3')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
+configurations {
+    all*.exclude group: "org.slf4j", module: "slf4j-log4j12"
+}
+
+
 /**
 或者去掉springboot的log4j依赖
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter'){
+    compile('org.springframework.boot:spring-boot-starter') {
         exclude module: 'slf4j-log4j12'
         exclude module: 'log4j'
     }
